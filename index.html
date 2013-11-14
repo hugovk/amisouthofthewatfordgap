@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Am I south of the Watford Gap?</title>
+<style>
+html {
+  overflow-y: scroll;
+  -webkit-font-smoothing: antialiased;
+}
+html, body {
+  background: black;
+  color: white;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+h1, h2 {
+  font-family: Arial;
+  font-weight: normal;
+}
+h1 {
+  font-size: 750%;
+  width: 100%;
+}
+h2 {
+  font-size: x-large;
+}
+</style>
+
+<h2>Am I south of the Watford Gap?</h2>
+
+<h1><span id="live-geolocation"></span></h1>
+
+<script src="jquery.js"></script>
+<script src="geoPosition.js"></script>
+<script>
+function lookup_location() {
+  geoPosition.getCurrentPosition(show_answer, show_answer_error);
+}
+function show_answer(loc) {
+  if (loc.coords.latitude < 52.306) {
+    $("#live-geolocation").html('Yes.');
+  }
+  else {
+    $("#live-geolocation").html('No.');
+  }
+}
+function show_answer_error() {
+  $("#live-geolocation").html('Dunno.');
+}
+$(function() {
+  if (geoPosition.init()) {
+    $("#live-geolocation").html('Checking...');
+    lookup_location()
+  } else {
+    $("#live-geolocation").html('Dunno.');
+  }
+});
+</script>
