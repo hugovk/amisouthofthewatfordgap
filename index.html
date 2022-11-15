@@ -14,7 +14,7 @@ html, body {
   text-align: center;
 }
 h1, h2 {
-  font-family: Arial;
+  font-family: Arial, serif;
   font-weight: normal;
 }
 h1 {
@@ -30,7 +30,6 @@ h2 {
 
 <h1><span id="live-geolocation"></span></h1>
 
-<script src="jquery.js"></script>
 <script src="geoPosition.js"></script>
 <script>
 function lookup_location() {
@@ -38,21 +37,21 @@ function lookup_location() {
 }
 function show_answer(loc) {
   if (loc.coords.latitude < 52.306) {
-    $("#live-geolocation").html('Yes.');
+    document.querySelector("#live-geolocation").innerHTML = 'Yes.';
   }
   else {
-    $("#live-geolocation").html('No.');
+    document.querySelector("#live-geolocation").innerHTML = 'No.';
   }
 }
 function show_answer_error() {
-  $("#live-geolocation").html('Dunno.');
+  document.querySelector("#live-geolocation").innerHTML = 'Dunno.';
 }
-$(function() {
+document.addEventListener('DOMContentLoaded', function() {
   if (geoPosition.init()) {
-    $("#live-geolocation").html('Checking...');
+    document.querySelector("#live-geolocation").innerHTML = 'Checking...';
     lookup_location()
   } else {
-    $("#live-geolocation").html('Dunno.');
+    document.querySelector("#live-geolocation").innerHTML = 'Dunno.';
   }
-});
+})
 </script>
